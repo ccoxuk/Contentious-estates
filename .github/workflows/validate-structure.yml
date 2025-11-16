@@ -1,0 +1,104 @@
+name: Validate Structure
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-structure:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate directory structure
+        run: |
+          echo "Checking required directories..."
+
+          required_dirs=(
+            "docs/contentious-probate-manual"
+            "docs/templates/contentious-probate"
+            "docs/admin/contentious-probate-file"
+            "docs/references/legislation"
+            "docs/references/cases"
+            "docs/references/guidance"
+            "docs/references/procedural-rules"
+            "docs/references/practice-directions"
+            "docs/references/forms"
+            "docs/references/metadata"
+            "scripts"
+            ".github/workflows"
+          )
+
+          all_exist=true
+
+          for dir in "${required_dirs[@]}"; do
+            if [ -d "$dir" ]; then
+              echo "✓ $dir"
+            else
+              echo "✗ Missing required directory: $dir"
+              all_exist=false
+            fi
+          done
+
+          if [ "$all_exist" = false ]; then
+            echo "::error::Required directory structure is incomplete"
+            exit 1
+          fi
+
+          echo "✓ All required directories exist"
+
+      - name: Check for required files
+        run: |
+          echo "Checking required files..."
+
+          required_files=(
+            ".github/ENGINEERING_PRACTICES.md"
+            "scripts/validate_references.py"
+            "scripts/generate_reference_index.py"
+            "requirements.txt"
+          )
+
+          all_exist=true
+
+          for file in "${required_files[@]}"; do
+            if [ -f "$file" ]; then
+              echo "✓ $file"
+            else
+              echo "✗ Missing required file: $file"
+              all_exist=false
+            fi
+          done
+
+          if [ "$all_exist" = false ]; then
+            echo "::error::Required files are missing"
+            exit 1
+          fi
+
+          echo "✓ All required files exist"
+
+      - name: Validate naming conventions
+        run: |
+          echo "Checking file naming conventions..."
+
+          # Check for files with spaces in names (not allowed)
+          files_with_spaces=$(find docs/references -type f -name "* *" 2>/dev/null || true)
+
+          if [ -n "$files_with_spaces" ]; then
+            echo "::error::Files with spaces in names found (use kebab-case):"
+            echo "$files_with_spaces"
+            exit 1
+          fi
+
+          # Check for uppercase in PDF filenames
+          uppercase_pdfs=$(find docs/references -type f -name "*.pdf" -name "*[A-Z]*" 2>/dev/null || true)
+
+          if [ -n "$uppercase_pdfs" ]; then
+            echo "::warning::PDFs with uppercase letters found (prefer lowercase):"
+            echo "$uppercase_pdfs"
+          fi
+
+          echo "✓ Naming conventions check complete"
