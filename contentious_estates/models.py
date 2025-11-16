@@ -6,7 +6,7 @@ key dates, witnesses, and evidence.
 """
 
 from typing import Optional, Dict, Any, List
-from datetime import datetime
+from datetime import datetime, timezone
 from dataclasses import dataclass, field
 
 
@@ -16,7 +16,7 @@ class KeyDate:
     date_type: str
     date_value: str  # ISO format date string
     description: Optional[str] = None
-    created_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
+    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary representation"""
@@ -35,7 +35,7 @@ class Witness:
     role: str  # e.g., 'executor', 'beneficiary', 'witness'
     contact: Optional[str] = None
     notes: Optional[str] = None
-    created_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
+    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary representation"""
@@ -55,7 +55,7 @@ class Evidence:
     description: str
     evidence_type: Optional[str] = None  # e.g., 'will', 'disclosure', 'affidavit'
     metadata: Dict[str, Any] = field(default_factory=dict)
-    created_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
+    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary representation"""
@@ -77,8 +77,8 @@ class CaseMetadata:
     witnesses: List[Witness] = field(default_factory=list)
     evidence: List[Evidence] = field(default_factory=list)
     additional_metadata: Dict[str, Any] = field(default_factory=dict)
-    created_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
-    updated_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
+    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    updated_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary representation"""

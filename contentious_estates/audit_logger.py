@@ -6,7 +6,7 @@ tracking of all operations on case data.
 """
 
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional, Dict, Any
 import json
 from pathlib import Path
@@ -46,6 +46,10 @@ class AuditLogger:
         self.audit_logger = logging.getLogger("contentious_estates.audit")
         self.audit_logger.setLevel(logging.INFO)
         
+        # Don't add handlers if they already exist
+        if self.audit_logger.handlers:
+            return
+        
         # Create file handler
         fh = logging.FileHandler(self.log_file)
         fh.setLevel(logging.INFO)
@@ -57,9 +61,8 @@ class AuditLogger:
         )
         fh.setFormatter(formatter)
         
-        # Add handler if not already added
-        if not self.audit_logger.handlers:
-            self.audit_logger.addHandler(fh)
+        # Add handler
+        self.audit_logger.addHandler(fh)
     
     def log_event(
         self,
@@ -83,7 +86,7 @@ class AuditLogger:
             return
         
         audit_entry = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "event_type": event_type,
             "user_id": user_id,
             "case_id": case_id,
