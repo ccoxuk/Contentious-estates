@@ -1,0 +1,29 @@
+# Contentious Probate Legal Resources - Files to Exclude
+
+# PDF and document files (tracked separately or too large for git)
+*.pdf
+*.PDF
+
+# Microsoft Office files
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+
+# Temporary and backup files
+*~
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+
+# Editor-specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Note: Metadata files (*.md in metadata/) should be committed
+# Note: .gitkeep files should be committed to preserve directory structure
