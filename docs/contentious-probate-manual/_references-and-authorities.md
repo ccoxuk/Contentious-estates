@@ -1,11 +1,64 @@
 # References and Authorities
 
-*Auto-generated on 2025-11-16 at 21:22 UTC*
+*Auto-generated on 2025-11-16 at 21:26 UTC*
 
 This document provides a comprehensive index of all reference materials used in the Contentious Probate Manual & Toolkit.
 
 ## Table of Contents
 
+- [Legislation](#legislation) (1)
+- [Case Law](#case-law) (1)
+- [Court Forms](#court-forms) (1)
+
+## Legislation
+
+### Inheritance (Provision for Family and Dependants) Act 1975
+
+**Citation**: 1975 c. 63
+
+**Date**: 1975-11-12
+
+**Document**: [PDF](../references/legislation/statute-inheritance-act-1975.pdf)
+
+**Source**: [https://www.legislation.gov.uk/ukpga/1975/63](https://www.legislation.gov.uk/ukpga/1975/63)
+
+Enables certain categories of people to apply for reasonable financial provision from the estate of a deceased person.
+
+---
+
+## Case Law
+
+### Ilott v Mitson and others
+
+**Citation**: [2017] UKSC 17
+
+**Date**: 2017-03-15
+
+**Document**: [PDF](../references/cases/case-ilott-v-mitson-2017.pdf)
+
+**Source**: [https://www.bailii.org/uk/cases/UKSC/2017/17.html](https://www.bailii.org/uk/cases/UKSC/2017/17.html)
+
+Landmark Supreme Court decision on family provision claims by adult children under the Inheritance Act 1975.
+
+**Related Legislation**: statute-inheritance-act-1975.pdf
+
+---
+
+## Court Forms
+
+### Form N1 - Claim Form
+
+**Citation**: N1
+
+**Date**: 2024-04-01
+
+**Document**: [PDF](../references/forms/form-n1-claim-form.pdf)
+
+**Source**: [https://www.gov.uk/government/publications/form-n1-claim-form](https://www.gov.uk/government/publications/form-n1-claim-form)
+
+Standard claim form for commencing civil proceedings, including contentious probate claims.
+
+---
 
 ---
 
