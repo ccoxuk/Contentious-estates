@@ -1,0 +1,11 @@
+# .gitmodules template
+# 
+# To add Memori as a submodule, run:
+# git submodule add https://github.com/mem0ri/mem0ri.git memori
+# 
+# This file will be automatically created when you run the above command.
+# After adding the submodule, this template file can be removed.
+
+[submodule "memori"]
+    path = memori
+    url = https://github.com/mem0ri/mem0ri.git
