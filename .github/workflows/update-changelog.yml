@@ -1,0 +1,52 @@
+name: Update Changelog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/references/**"
+
+jobs:
+  update-changelog:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Update changelog
+        run: |
+          python scripts/update_changelog.py
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet docs/contentious-probate-manual/_changelog.md; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add docs/contentious-probate-manual/_changelog.md
+          git commit -m "chore: auto-update changelog [skip ci]"
+          git push
